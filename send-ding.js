@@ -23,9 +23,9 @@ function getGitInfo(cwd) {
   const options = {
     cwd,
   }
-  const maxCommitNum = 5
+  const maxCommitNum = 1
   try {
-    let commitMsgs = execSync(`git log --no-merges -n ${5} --grep="^[feat|fix]" --format=format:"* %s (@%cn #DATE<%cd>)"`, options)
+    let commitMsgs = execSync(`git log --no-merges -n ${1} --grep="^[feat|fix]" --format=format:"* %s (@%cn #DATE<%cd>)"`, options)
       .toString().trim()
     commitMsgs = replaceDate(commitMsgs)
     const branchName = execSync('git rev-parse --abbrev-ref HEAD', options)
@@ -60,41 +60,46 @@ module.exports = async function sendDingMsg(options = {
 
   const uploadType = isExperience ? '体验版' : '预览版'
 
-  const alipayPart = alipayQRImgUrl && `
-## 支付宝${uploadType}${isExperience ? '' : '(有效期24小时)'}：
-![](${alipayQRImgUrl})
+//   const alipayPart = alipayQRImgUrl && `
+// ## 支付宝${uploadType}${isExperience ? '' : '(有效期24小时)'}：
+// ![](${alipayQRImgUrl})
+// `
+
+//   const wechatPart = weappQRImgUrl && `
+// ## 微信${uploadType}${isExperience ? '' : '(有效期半小时)'}：
+// ![](${weappQRImgUrl})
 `
 
-  const wechatPart = weappQRImgUrl && `
-## 微信${uploadType}${isExperience ? '' : '(有效期半小时)'}：
-![](${weappQRImgUrl})
-`
+//   const TEMPLATE = `
+//  ${uploadType}小程序构建完成
+// ---
+// 构建时间: ${new Dayjs().format('YYYY-MM-DD HH:mm')}
 
-  const TEMPLATE = `
-# ${uploadType}小程序构建完成
----
-构建时间: ${new Dayjs().format('MM-DD HH:mm')}
+// 构建机器：${HOSTNAME}
 
-构建机器：${HOSTNAME}
+// ${gitInfo}
 
-${gitInfo}
+// ---
+// ${wechatPart || ''}
 
----
-${wechatPart || ''}
+// ${alipayPart || ''}
+// `
 
-${alipayPart || ''}
-`
+const TEMPLATE = `<div>
+  <span>${uploadType}小程序构建完成</span>
+  </br>
+  <span>构建时间: ${new Dayjs().format('YYYY-MM-DD HH:mm')}</span>
+  </br>
+  <span>构建机器：${HOSTNAME}</span>
+  </br>
+  <span>git log: ${gitInfo}</span>
+  </br>
+  <span>
+    微信${uploadType}${isExperience ? '' : '(有效期半小时)'}
+    <img src=${weappQRImgUrl || ''} />
+  </span>
+</div>`
 
-  const postBody = {
-    msgtype: 'markdown',
-    markdown: {
-      title: '小程序构建已完成',
-      text: TEMPLATE,
-    },
-    at: {
-      isAtAll: isExperience,
-    }
-  }
 
   let transporter = nodemailer.createTransport({
     host: emailSetting.sendEmailHost,
@@ -109,7 +114,13 @@ ${alipayPart || ''}
     to: emailSetting.sendEmailTo,
     subject: emailSetting.emailSubject,
     text: emailSetting.emailText,
-    html: `<h1>${JSON.stringify(postBody)}</h1>`
+    html: `<b>${TEMPLATE}</b>`
+  }).then(res => {
+    console.log('邮件发送成功', res)
+    transporter.close()
+  }).catch(err => {
+    transporter.close()
+    console.log('邮件发送失败', err)
   })
 
   // console.log('正在推送钉钉消息...')
