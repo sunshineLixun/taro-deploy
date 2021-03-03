@@ -1,14 +1,13 @@
 {
-  "name": "taro-deploy",
-  "version": "1.0.0",
+  "name": "taro-deploy-email",
+  "version": "1.0.1",
   "description": "Auto deploy taro app.",
   "main": "cli.js",
   "bin": {
-    "taro-deploy": "./cli.js"
+    "taro-deploy-email": "./cli.js"
   },
-  "scripts": {
-  },
-  "author": "jackson.lin",
+  "scripts": {},
+  "author": "lixun",
   "license": "ISC",
   "dependencies": {
     "alipay-dev": "^0.4.15",
@@ -16,6 +15,7 @@
     "fs-extra": "^9.0.1",
     "merge": "^1.2.1",
     "miniprogram-ci": "^1.0.79",
-    "node-fetch": "^2.6.1"
+    "node-fetch": "^2.6.1",
+    "nodemailer": "^6.5.0"
   }
 }

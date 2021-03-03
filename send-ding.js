@@ -2,6 +2,8 @@
 const { execSync } = require('child_process')
 const HOSTNAME = require('os').hostname()
 const fetch = require('node-fetch')
+const nodemailer = require('nodemailer')
+
 
 const Dayjs = require('dayjs')
 const relativeTime = require('dayjs/plugin/relativeTime')
@@ -52,6 +54,7 @@ module.exports = async function sendDingMsg(options = {
     isExperience,
     absConfigDir,
     dingTalkUrl,
+    emailSetting
   } = options
   const gitInfo = getGitInfo(absConfigDir)
 
@@ -93,14 +96,30 @@ ${alipayPart || ''}
     }
   }
 
-  console.log('正在推送钉钉消息...')
-  // console.log(TEMPLATE)
-  await fetch(dingTalkUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(postBody)
+  let transporter = nodemailer.createTransport({
+    host: emailSetting.sendEmailHost,
+    secure: true,
+    port: emailSetting.sendEmailPort,
+    secureConnection: true,
+    auth: emailSetting.sendEmailAuth
   })
-  console.log('推送钉钉消息完成')
+
+  await transporter.sendMail({
+    from: emailSetting.sendEmailFrom,
+    to: emailSetting.sendEmailTo,
+    subject: emailSetting.emailSubject,
+    text: emailSetting.emailText,
+    html: `<h1>${JSON.stringify(postBody)}</h1>`
+  })
+
+  // console.log('正在推送钉钉消息...')
+  // // console.log(TEMPLATE)
+  // await fetch(dingTalkUrl, {
+  //   method: 'POST',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(postBody)
+  // })
+  // console.log('推送钉钉消息完成')
 }

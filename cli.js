@@ -39,15 +39,15 @@ if (theConfig.outDir) {
 }
 
 async function sendDingMsg(alipayQRImgUrl, weappQRImgUrl) {
-  if (!alipayQRImgUrl && !weappQRImgUrl) {
-    log('缺少二维码，不推送钉钉消息')
-    return
-  }
+  // if (!alipayQRImgUrl && !weappQRImgUrl) {
+  //   log('缺少二维码，不推送钉钉消息')
+  //   return
+  // }
 
-  if (!theConfig.dingTalkUrl) {
-    log('缺少 dingTalkUrl 配置，不推送钉钉消息')
-    return
-  }
+  // if (!theConfig.dingTalkUrl) {
+  //   log('缺少 dingTalkUrl 配置，不推送钉钉消息')
+  //   return
+  // }
 
   const options = {
     alipayQRImgUrl,
@@ -55,6 +55,7 @@ async function sendDingMsg(alipayQRImgUrl, weappQRImgUrl) {
     isExperience: theConfig.isExperience,
     dingTalkUrl: theConfig.dingTalkUrl,
     absConfigDir,
+    emailSetting: theConfig.emailSetting
   }
   await sendDing(options)
 }
