@@ -138,7 +138,7 @@ module.exports = {
   },
     //邮件配置
   emailSetting: {
-      sendEmailHost: "smtp.exmail.qq.com",//发送方邮箱host 这里是以QQ邮箱为例子
+      sendEmailHost: "smtp.xx.com",//发送方邮箱host 
       sendEmailPort: 465, //通用465端口
 
       //发送邮件放的授权信息
