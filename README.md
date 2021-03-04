@@ -1,8 +1,10 @@
-# taro-deploy 是什么？
+# taro-deploy-email 是什么？
+
+本项目是根据[taro-deploy](https://github.com/linjackson78/taro-deploy)开发完成，新增了发送邮件功能
 
 如果你使用 [Taro](https://taro.aotu.io/) 开发小程序项目，可以使用本项目提供的命令行工具，进行一键自动化构建发布，并将构建结果推送到钉钉群里。
 
-# 为什么要用 taro-deploy？
+# 为什么要用 taro-deploy-email？
 
 Taro 小程序开发者常有这种痛点：开发好代码想要发布提测，需要进行以下一系列步骤（以支付宝、微信小程序平台为例）：
 
@@ -34,15 +36,16 @@ NOTE: git commit 日志目前只会展示 `feat` 和 `fix` 关键词开头的 co
 2. 需要支持微信和支付宝平台
 3. 想要自动化构建发布，不想手动操作
 4. 使用钉钉办公，开发和测试都在一个钉钉群里（这点不是必需的，没有钉钉也可以使用 taro-deploy，只是会多了一些手动操作）
+5. 新增发送邮件功能
 
-那你就非常适合使用 taro-deploy 了。
+那你就非常适合使用 taro-deploy-email 了。
 
 # 怎么用？
 
 ## Step 1 - 安装
 
 ```shell
-npm i -g taro-deploy
+npm i -g taro-deploy-email
 ```
 
 ## Step 2 - 平台相关的准备步骤
@@ -133,6 +136,24 @@ module.exports = {
   env: {
     BUILD_ENV: 'test' // 仅作 demo，实际应填入你项目编译需要用的环境变量
   },
+    //邮件配置
+  emailSetting: {
+      sendEmailHost: "smtp.exmail.qq.com",//发送方邮箱host 这里是以QQ邮箱为例子
+      sendEmailPort: 465, //通用465端口
+
+      //发送邮件放的授权信息
+      sendEmailAuth: {
+          user: '', //发送方邮箱
+          pass: "" //发送方邮箱验证码(不是密码)
+      },
+
+      sendEmailFrom: "", //发送方邮箱  要与user保持一致
+      //接收方方邮件
+      sendEmailTo: "",
+      //邮件标题
+      emailSubject: "标题",
+      emailText: "邮件内容", //邮件内容
+  },
 
   // Step 3 中获取的钉钉机器人 webhook url
   dingTalkUrl: 'https://oapi.dingtalk.com/robot/send?access_token=xxx',
@@ -164,7 +185,7 @@ module.exports = {
 
 ```bash
 # cd 到你们的项目并运行
-taro-deploy
+taro-deploy-email
 ```
 
 然后就可以静候钉钉机器人推送构建结果了 :-)
