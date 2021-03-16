@@ -1,5 +1,10 @@
 # taro-deploy-email 是什么？
 
+taro-deploy-email是根据[taro-deploy](https://github.com/linjackson78/taro-deploy)而来的。
+
+- 新增了打包上传成功发送邮件功能
+- 新增了切换分支、选择打包环境功能
+- 修复了在Windows平台下打包失败的问题
 
 如果你使用 [Taro](https://taro.aotu.io/) 开发小程序项目，可以使用本项目提供的命令行工具，进行一键自动化构建发布，并将构建结果推送到钉钉群里。
 
