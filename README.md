@@ -1,9 +1,9 @@
-# ydk-taro-deploy 是什么？
+# taro-deploy-email 是什么？
 
 
 如果你使用 [Taro](https://taro.aotu.io/) 开发小程序项目，可以使用本项目提供的命令行工具，进行一键自动化构建发布，并将构建结果推送到钉钉群里。
 
-# 为什么要用 ydk-taro-deploy？
+# 为什么要用 taro-deploy-email？
 
 Taro 小程序开发者常有这种痛点：开发好代码想要发布提测，需要进行以下一系列步骤（以支付宝、微信小程序平台为例）：
 
@@ -11,11 +11,11 @@ Taro 小程序开发者常有这种痛点：开发好代码想要发布提测，
 
 整个流程将近十分钟，其中还有不少需要手动操作的环节，可以说这种原始的发布方式效率非常低。
 
-ydk-taro-deploy 就是为了解决这个痛点出现的，它集成了支付宝和微信提供的命令行工具，自动化地完成上述流程。
+taro-deploy-email 就是为了解决这个痛点出现的，它集成了支付宝和微信提供的命令行工具，自动化地完成上述流程。
 
-用了 ydk-taro-deploy，开发者在发布提测时只需两步：
+用了 taro-deploy-email，开发者在发布提测时只需两步：
 
-1. 运行一次命令 ydk-taro-deploy
+1. 运行一次命令 taro-deploy-email
 2. 去喝杯茶歇一下
 
 构建发布完了，钉钉上就会收到构建结果的推送了，全程无需人工干预。
@@ -34,21 +34,21 @@ NOTE: git commit 日志目前只会展示 `feat` 和 `fix` 关键词开头的 co
 1. 使用 Taro 框架开发小程序
 2. 需要支持微信和支付宝平台
 3. 想要自动化构建发布，不想手动操作
-4. 使用钉钉办公，开发和测试都在一个钉钉群里（这点不是必需的，没有钉钉也可以使用 ydk-taro-deploy，只是会多了一些手动操作）
+4. 使用钉钉办公，开发和测试都在一个钉钉群里（这点不是必需的，没有钉钉也可以使用 taro-deploy-email，只是会多了一些手动操作）
 5. 新增发送邮件功能
 
-那你就非常适合使用 ydk-taro-deployl 了。
+那你就非常适合使用 taro-deploy-emaill 了。
 
 # 怎么用？
 
 ## Step 1 - 安装
 
 ```shell
-npm i -g ydk-taro-deploy
+npm i -g taro-deploy-email
 
 或者
 
-yarn global add ydk-taro-deploy
+yarn global add taro-deploy-email
 ```
 
 ## Step 2 - 平台相关的准备步骤
@@ -187,17 +187,16 @@ module.exports = {
 ## Step 5
 
 ```bash
-示例： "ydk-taro-deploy": "build:weapp && ydk-taro-deploy"
 # cd 到你们的项目并运行
-ydk-taro-deploy
+taro-deploy-email 分支 环境
 ```
 
 然后就可以静候钉钉机器人推送构建结果了 :-)
 
 # FAQ
 
-### Q: 我们没有用钉钉办公，怎么用 ydk-taro-deploy？
-A: ydk-taro-deploy 目前只支持推送钉钉消息，否则只能完成自动化构建、上传、设置体验版，没法完成最后的推送步骤。如果有推送其它IM工具的需求，可以尝试自行实现，也欢迎提交 PR。
+### Q: 我们没有用钉钉办公，怎么用 taro-deploy-email？
+A: taro-deploy-email 目前只支持推送钉钉消息，否则只能完成自动化构建、上传、设置体验版，没法完成最后的推送步骤。如果有推送其它IM工具的需求，可以尝试自行实现，也欢迎提交 PR。
 
 ### Q: 为什么发布预览版要实现 uploadImage 函数这么麻烦？
 
@@ -209,15 +208,15 @@ A: 请到微信的网页控制台上检查确保已将「ci机器人1」上传�
 
 ### Q: 只支持微信和支付宝吗？
 
-A: Taro 支持很多平台，但是 ydk-taro-deploy 目前只支持了微信和支付宝两个平台的自动构建和发布。
+A: Taro 支持很多平台，但是 taro-deploy-email 目前只支持了微信和支付宝两个平台的自动构建和发布。
 
 ### Q: 没有找到 ci机器人1 上传的版本？
 
-A: 先跑一遍 ydk-taro-deploy，等上传完成以后，就可以在微信小程序控制台网页的「版本控制」菜单里找到。
+A: 先跑一遍 taro-deploy-email，等上传完成以后，就可以在微信小程序控制台网页的「版本控制」菜单里找到。
 
 ### Q: 这个工具如果出 bug 了，会造成小程序的线上故障吗？
 
-A: ydk-taro-deploy 目前只支持发布预览版和体验版，不支持发布生产版，不会影响到生产环境。
+A: taro-deploy-email 目前只支持发布预览版和体验版，不支持发布生产版，不会影响到生产环境。
 
 ### Q: 我想定制钉钉推送消息的内容
 
