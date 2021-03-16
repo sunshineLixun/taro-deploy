@@ -189,6 +189,8 @@ module.exports = {
 ```bash
 # cd 到你们的项目并运行
 taro-deploy-email 分支 环境
+
+比如: taro-deploy-email dev test
 ```
 
 然后就可以静候钉钉机器人推送构建结果了 :-)
