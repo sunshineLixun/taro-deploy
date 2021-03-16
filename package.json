@@ -1,6 +1,6 @@
 {
   "name": "taro-deploy-email",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Auto deploy taro app.",
   "main": "cli.js",
   "bin": {
@@ -13,6 +13,7 @@
     "alipay-dev": "^0.4.15",
     "dayjs": "^1.8.35",
     "fs-extra": "^9.0.1",
+    "inquirer": "^8.0.0",
     "merge": "^1.2.1",
     "miniprogram-ci": "^1.0.79",
     "node-fetch": "^2.6.1",

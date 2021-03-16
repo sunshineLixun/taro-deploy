@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-
 const path = require('path')
-const { execSync} = require('child_process')
+const { execSync } = require('child_process')
 const merge = require('merge')
 const fs = require('fs-extra')
 const AlipayFlow = require('./alipay-flow')
@@ -73,6 +72,7 @@ function npmInstall () {
 
 async function main() {
   try {
+
     await npmInstall()
 
     const promises = []
