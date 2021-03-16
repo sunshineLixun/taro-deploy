@@ -1,6 +1,6 @@
 {
   "name": "taro-deploy-email",
-  "version": "1.0.5",
+  "version": "1.0.51",
   "description": "Auto deploy taro app.",
   "main": "cli.js",
   "bin": {

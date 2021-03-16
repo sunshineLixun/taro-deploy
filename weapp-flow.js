@@ -3,7 +3,6 @@ const {spawn, exec} = require('child_process')
 const fs = require('fs-extra')
 const ci = require('miniprogram-ci')
 
-const envs = ['dev', 'test', 'mo', 'prod']
 
 class WeappFlow {
   constructor(options = {
@@ -66,7 +65,7 @@ class WeappFlow {
     let _that = this
     this.log('开始编译...')
     return new Promise((resolve, reject) => {
-      
+
       const cmd = 'taro build --type weapp'
       const proc = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', cmd.split(' '), {
         env: {
@@ -123,11 +122,6 @@ class WeappFlow {
       }
       let branch = buildOptioons[0]
       let env = buildOptioons[1]
-      if (!envs.includes(env)) {
-        this.log('请输入正确的环境')
-        resolve(false)
-        return
-      }
       let isSucc = await this.fetchBranch(branch)
   
       if (!isSucc) {
