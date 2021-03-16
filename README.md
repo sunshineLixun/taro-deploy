@@ -1,6 +1,8 @@
 # taro-deploy-email 是什么？
 
-taro-deploy-email是根据[taro-deploy](https://github.com/linjackson78/taro-deploy)而来的。
+taro-deploy-email是根据[taro-deploy](https://github.com/linjackson78/taro-deploy)而来的。感谢[taro-deploy](https://github.com/linjackson78/taro-deploy)。
+
+我主要根据[taro-deploy](https://github.com/linjackson78/taro-deploy)做了一些以下扩展。后续还会继续维护。
 
 - 新增了打包上传成功发送邮件功能
 - 新增了切换分支、选择打包环境功能
